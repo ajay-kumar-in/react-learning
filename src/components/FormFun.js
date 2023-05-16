@@ -59,8 +59,8 @@ function FormFun(props) {
 
     return (
         <form onSubmit={submitHandler}>
-            <div className={styles['new-expense__controls']}>
-                <div className={styles['new-expense__control']}>
+            <div className={`${styles['new-expense__controls']}`}>
+                <div className={`${styles['new-expense__control']}`}>
                     <label>Title</label>
                     <input type='text' value={newtitle} onChange={titleChangeHandler} />
                 </div>
@@ -73,8 +73,8 @@ function FormFun(props) {
                     <input type='date' min='2019-01-01' max='2022-12-31' value={newDate} onChange={dateChangeHandler} required />
                 </div>
             </div>
-            <div className={styles['new-expense__actions']}>
-                <button type='submit'>Add Expense</button>
+            <div className={`${styles['new-expense__actions']}`}>
+                <button className='bg-success' type='submit'>Add Expense</button>
             </div>
         </form>
     )
