@@ -1,10 +1,12 @@
 import styles from './FormFun.module.css';
-import { useState } from 'react';
+import react, { useState, useRef } from 'react';
 
 function FormFun(props) {
     const [newtitle, setNewTitle] = useState('');
     const [newAmount, setNewAmount] = useState('');
     const [newDate, setNewDate] = useState('');
+
+    let titleChangeRef = useRef()
 
     // const [userInput, setUserInput] = useState({
     //     newtitle: '',
@@ -44,13 +46,16 @@ function FormFun(props) {
 
     const submitHandler = (event) => {
         event.preventDefault();
+        console.log('titleChangeRef.current.value', titleChangeRef.current.value);
         const dataObj = {
-            title: newtitle,
+            // title: newtitle,
+            title: titleChangeRef.current.value,
             amount: newAmount,
             date: new Date(newDate).toISOString()
         }
 
-        setNewTitle('');
+        // setNewTitle('');
+        titleChangeRef.current.value = '';
         setNewAmount('');
         setNewDate('');
 
@@ -60,9 +65,14 @@ function FormFun(props) {
     return (
         <form onSubmit={submitHandler}>
             <div className={`${styles['new-expense__controls']}`}>
-                <div className={`${styles['new-expense__control']}`}>
+                {/* <div className={`${styles['new-expense__control']}`}>
                     <label>Title</label>
                     <input type='text' value={newtitle} onChange={titleChangeHandler} />
+                </div> */}
+
+                <div className={`${styles['new-expense__control']}`}>
+                    <label>Title</label>
+                    <input type='text' ref={titleChangeRef} />
                 </div>
                 <div className={styles['new-expense__control']}>
                     <label>Amount</label>

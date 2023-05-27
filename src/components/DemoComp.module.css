@@ -3,14 +3,3 @@
     flex-direction: column;
     align-items: center;
 }
-
-.democss {
-    background-color: red;
-    width: 90%;
-    height: 100px;
-}
-
-.nameCss {
-    margin-right: 20px;
-    background: rgb(153, 143, 206);
-}

@@ -1,6 +1,7 @@
 import styles from './DemoComp.module.css'
 import Card from './Card';
-import { useState } from 'react';
+import React, { useState } from 'react';
+import ReactDOM from 'react-dom'
 import FormFun from './FormFun';
 import ListData from './ListData'
 
@@ -14,29 +15,38 @@ function DemoComp(props) {
     const [items, setItems] = useState(itemsDummy);
 
     const getEnteredDataOnSubmitHandler = (childCompExp) => {
-        setItems((previousItems)=> {
-            return [{...childCompExp, id: Math.random(1)}, ...previousItems]
+        setItems((previousItems) => {
+            return [{ ...childCompExp, id: Math.random(1) }, ...previousItems]
         })
         console.log('prrr', props);
     }
 
     return (
         // <Card className={styles.ext_container}>
-        //     <FormFun></FormFun>
-        //     <div className={styles['democss']}>
-        //         <span className={styles['nameCss']}>{name}</span>
-        //         <span>{props.email}</span>
-        //         <button onClick={updateName}>Update name</button>
-        //     </div>
+        //         <FormFun getEnteredDataOnSubmit={getEnteredDataOnSubmitHandler}></FormFun>
+        //         {items.map(el => <ListData
+        //             key={el.id} title={el.title} amount={el.amount} date={el.date}
+        //         />)}
         // </Card>
 
-        <div className={styles.ext_container}>
-            <FormFun getEnteredDataOnSubmit={getEnteredDataOnSubmitHandler}></FormFun>
-            {/* {props.items.map((el) => <ListData key={el.id} title={el.title} amount={el.amount} date={el.date}/>)} */} 
-            {items.map(el=> <ListData 
-                key={el.id} title={el.title} amount={el.amount} date={el.date}
-            />)}
-        </div>
+        <React.Fragment>
+            {/* {ReactDOM.createPortal(
+                <div className={styles.ext_container}>
+                    <FormFun getEnteredDataOnSubmit={getEnteredDataOnSubmitHandler}></FormFun>
+                    {items.map(el => <ListData
+                        key={el.id} title={el.title} amount={el.amount} date={el.date}
+                    />)}
+                </div>,
+                document.getElementById('parallel-root')
+            )} */}
+
+            <div className={styles.ext_container}>
+                <FormFun getEnteredDataOnSubmit={getEnteredDataOnSubmitHandler}></FormFun>
+                {items.map(el => <ListData
+                    key={el.id} title={el.title} amount={el.amount} date={el.date}
+                />)}
+            </div>
+        </React.Fragment>
     )
 }
 
