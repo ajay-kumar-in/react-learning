@@ -13,7 +13,7 @@ const ProductHeader = () => {
     }
 
     return <React.Fragment>
-        <ul className="nav bg-secondary">
+        <ul className={`${styles['header_nav']} nav bg-primary`}>
             <li className="nav-item">
                 <NavLink to="/" className={({ isActive }) => isActive ? `nav-link ${styles.active}` : 'nav-link'} end >Home</NavLink>
             </li>
@@ -21,16 +21,16 @@ const ProductHeader = () => {
                 <NavLink to="/products" className={({ isActive }) => isActive ? `nav-link ${styles.active}` : 'nav-link'} end >Products</NavLink>
             </li>
             <li className="nav-item">
-                <NavLink to="/products/add" className={({ isActive }) => isActive ? `nav-link ${styles.active}` : 'nav-link'} end >Add Product</NavLink>
+                <NavLink to="addproduct" className={({ isActive }) => isActive ? `nav-link ${styles.active}` : 'nav-link'} end >Add Product</NavLink>
             </li>
             <li className="nav-item">
                 <NavLink to="democomp" className={({ isActive }) => isActive ? `nav-link ${styles.active}` : 'nav-link'} end tabIndex="-1">Demo Comp</NavLink>
             </li>
             <li className="nav-item">
-                <NavLink to="signup" className={({ isActive }) => isActive ? `nav-link ${styles.active}` : 'nav-link'} end onClick={signupHandler}>Signup</NavLink>
+                <NavLink to="login" className={({ isActive }) => isActive ? `nav-link ${styles.active}` : 'nav-link'} end onClick={loginHandler}>Login</NavLink>
             </li>
             <li className="nav-item">
-                <NavLink to="login" className={({ isActive }) => isActive ? `nav-link ${styles.active}` : 'nav-link'} end onClick={loginHandler}>Login</NavLink>
+                <NavLink to="signup" className={({ isActive }) => isActive ? `nav-link ${styles.active}` : 'nav-link'} end onClick={signupHandler}>Signup</NavLink>
             </li>
         </ul>
     </React.Fragment>

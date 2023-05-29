@@ -1,3 +1,13 @@
 .active {
-    color: darkgreen !important;
+    background-color: rgb(60, 133, 242);
+}
+
+.header_nav li a {
+    color: #111;
+}
+
+.header_nav li a:hover {
+    background-color: rgb(60, 133, 242);
+    transition: all 0.3s;
+    color: #111;;
 }

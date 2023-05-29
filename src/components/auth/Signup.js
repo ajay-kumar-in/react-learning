@@ -42,18 +42,24 @@ const Signup = () => {
         }
         console.log('signupFormData', signupFormData, event);
 
-        // const res = await fetch('http://localhost:3000/api/signup', {
-        //     method: 'POST',
-        //     headers: {
-        //         'Content-Type': 'application/json'
-        //     },
-        //     body: JSON.stringify(signupFormData)
-        // })
-        // console.log('res', res);
+        try {
+            const res = await fetch('http://localhost:3000/api/signup', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(signupFormData)
+            })
+            const signupData = await res.json();
 
-        // if(res.ok) {
-        //     navigate('../login');
-        // }
+            if (!res.ok) {
+                throw new Error(signupData.message);
+            }
+
+            navigate('../login');
+        } catch (err) {
+            console.log('err.message', err);
+        }
     }
 
     return <React.Fragment>
@@ -86,9 +92,9 @@ const Signup = () => {
                         <input type="password" id="password" onChange={passwordChangeHandler} className="form-control" placeholder="Enter password" />
                     </div>
 
-                            {/* <div className="form-group">
+                    {/* <div className="form-group">
                         <label htmlFor="confirmPassword" className="mb-1">Confirm Password:</label>
-                        <input type="password" id="confirmPassword" className="form-control" formControlName="confirmPassword" placeholder="Confirm Password" />
+                        <input type="password" id="confirmPassword" className="form-control" placeholder="Confirm Password" />
                     </div> */}
 
                     <div className="submit mt-4">
