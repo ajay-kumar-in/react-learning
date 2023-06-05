@@ -1,9 +1,11 @@
 import { useState, useRef } from 'react';
 
 import styles from './AddProduct.module.css';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 const AddProduct = () => {
+    const navigate = useNavigate();
+
     const nameInputRef = useRef();
     const descriptionInputRef = useRef();
     const originalPriceInputRef = useRef();
@@ -15,7 +17,7 @@ const AddProduct = () => {
     const [imageFile, setimageFile] = useState(null);
 
     function onImagePicked(event1) {
-        const target= event1.target;
+        const target = event1.target;
         let file = (target.files)[0];
         setimageFile(file);
         const reader = new FileReader();
@@ -23,12 +25,12 @@ const AddProduct = () => {
             setImagePreview(reader.result);
         };
         reader.readAsDataURL(file);
-      }
-    
-      const addProductHandler = (event)=> {
+    }
+
+    const addProductHandler = async (event) => {
         event.preventDefault();
-        
-        const productDetails = {
+
+        const productFormData = {
             name: nameInputRef.current.value,
             description: descriptionInputRef.current.value,
             originalPrice: originalPriceInputRef.current.value,
@@ -37,8 +39,29 @@ const AddProduct = () => {
             imagePath: imageFile,
             status: statusInputRef.current.value
         }
-        console.log('productDetails', productDetails);
-      }
+
+        const formData = new FormData();
+
+        for(let productProp in productFormData) {
+            formData.append(`${productProp}`, productFormData[productProp]);
+        }
+
+        try {
+            const res = await fetch('http://localhost:3000/api/product/new', {
+                method: 'POST',
+                headers: { },
+                body: formData
+            })
+            const addNewProductRes = await res.json();
+
+            if (!res.ok) {
+                throw new Error(addNewProductRes.message);
+            }
+            navigate('/products');
+        } catch (err) {
+            console.log('err.message', err);
+        }
+    }
 
     return <div className="container-fluid py-3">
         <div className="card">
@@ -97,7 +120,6 @@ const AddProduct = () => {
                     </div>
                 </form>
             </div>
-
         </div >
     </div >
 }

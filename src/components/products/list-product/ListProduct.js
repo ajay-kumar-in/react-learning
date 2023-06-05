@@ -10,7 +10,7 @@ const ListProduct = () => {
         async function getProducts() {
             const tokenLocal = localStorage.getItem('token');
             let token = tokenLocal.slice(1, tokenLocal.length - 1);
-            const response = await fetch('http://localhost:3000/api/products?page=1&size=50', {
+            const response = await fetch('http://localhost:3000/api/product/all?page=1&size=500', {
                 method: 'GET',
                 headers: {
                     'Content-type': 'application/json',
@@ -19,7 +19,7 @@ const ListProduct = () => {
             });
 
             if (!response.ok) {
-                alert('Failed to load products!')
+                alert('Please login to load products!')
             }
 
             const resData = await response.json();

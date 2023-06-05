@@ -7,13 +7,13 @@ const router = require('express').Router();
 const extractFile = require('../middlewares/check-img-mime-type');
 const middleErrMsg = require('../config/errorMsg');
 
-router.post('/product', extractFile, productController.addProduct, middleErrMsg);
+router.post('/new', extractFile, productController.addProduct, middleErrMsg);
 
-// router.post('/product', auth, extractFile, productController.addProduct, middleErrMsg);
-router.get('/products', auth, productController.getProducts);
-router.get('/product/:id', auth, productController.getProduct);
-router.put('/product/:id', auth, extractFile, productController.editProduct);
-router.delete('/product/:id', auth, productController.deleteProduct);
+// router.post('', auth, extractFile, productController.addProduct, middleErrMsg);
+router.get('/all', auth, productController.getProducts);
+router.get('/:id', auth, productController.getProduct);
+router.put('/:id', auth, extractFile, productController.editProduct);
+router.delete('/:id', auth, productController.deleteProduct);
 
 
 
