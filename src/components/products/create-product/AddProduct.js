@@ -1,6 +1,7 @@
 import { useState, useRef } from 'react';
 
 import styles from './AddProduct.module.css';
+import { Link } from 'react-router-dom';
 
 const AddProduct = () => {
     const nameInputRef = useRef();
@@ -90,7 +91,8 @@ const AddProduct = () => {
                         </div>
 
                         <div className="mt-3">
-                            <button type='submit' className="btn btn-info add_product">Add Product</button>
+                            <button type='submit' className={`btn btn-info ${styles['add_product']}`}>Add Product</button>
+                            <button className='btn btn-secondary'><Link className='text-light' to="/products">Back</Link></button>
                         </div>
                     </div>
                 </form>

@@ -3,3 +3,8 @@
     height: 200px;
     margin-top: 10px;
 }
+
+.add_product {
+    display: inline-block;
+    margin-right: 10px;
+}

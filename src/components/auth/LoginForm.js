@@ -81,11 +81,16 @@ export async function action({ request, params }) {
         body: JSON.stringify(loginFormData)
     });
 
+    if(!response.ok) {
+        alert('Login failed!');
+        return redirect('/login');
+    }
+
     if (response.ok) {
         let loginData = await response.json();
         localStorage.setItem('user', JSON.stringify(loginData.user));
         localStorage.setItem('token', JSON.stringify(loginData.token));
         localStorage.setItem('expirationDuration', JSON.stringify(loginData.expirationDuration))
-        return redirect('/addproduct');
+        return redirect('/products/add');
     }
 }

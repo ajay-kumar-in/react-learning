@@ -20,9 +20,12 @@ const ProductHeader = () => {
             <li className="nav-item">
                 <NavLink to="/products" className={({ isActive }) => isActive ? `nav-link ${styles.active}` : 'nav-link'} end >Products</NavLink>
             </li>
-            <li className="nav-item">
-                <NavLink to="addproduct" className={({ isActive }) => isActive ? `nav-link ${styles.active}` : 'nav-link'} end >Add Product</NavLink>
-            </li>
+            {/* <li className="nav-item">
+                <NavLink to="/products/add" className={({ isActive }) => isActive ? `nav-link ${styles.active}` : 'nav-link'} end >Add Product</NavLink>
+            </li> */}
+            {/* <li className="nav-item">
+                <NavLink to="products" className={({ isActive }) => isActive ? `nav-link ${styles.active}` : 'nav-link'} end >List Product</NavLink>
+            </li> */}
             <li className="nav-item">
                 <NavLink to="democomp" className={({ isActive }) => isActive ? `nav-link ${styles.active}` : 'nav-link'} end tabIndex="-1">Demo Comp</NavLink>
             </li>
