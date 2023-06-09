@@ -24,7 +24,6 @@ const ListProduct = () => {
 
             const resData = await response.json();
             setProducts(resData.products)
-            console.log('resData22222222222', resData);
 
         }
         getProducts();
