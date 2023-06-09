@@ -30,6 +30,9 @@ const ProductHeader = () => {
                 <NavLink to="democomp" className={({ isActive }) => isActive ? `nav-link ${styles.active}` : 'nav-link'} end tabIndex="-1">Demo Comp</NavLink>
             </li>
             <li className="nav-item">
+                <NavLink to="counter" className={({ isActive }) => isActive ? `nav-link ${styles.active}` : 'nav-link'} end>Counter(Redux)</NavLink>
+            </li>
+            <li className="nav-item">
                 <NavLink to="login" className={({ isActive }) => isActive ? `nav-link ${styles.active}` : 'nav-link'} end onClick={loginHandler}>Login</NavLink>
             </li>
             <li className="nav-item">

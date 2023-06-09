@@ -1,8 +1,8 @@
 import styles from './FormFun.module.css';
-import react, { useState, useRef } from 'react';
+import { useState, useRef } from 'react';
 
 function FormFun(props) {
-    const [newtitle, setNewTitle] = useState('');
+    // const [newtitle, setNewTitle] = useState('');
     const [newAmount, setNewAmount] = useState('');
     const [newDate, setNewDate] = useState('');
 
@@ -14,15 +14,15 @@ function FormFun(props) {
     //     newDate: ''
     // })
 
-    const titleChangeHandler = (event) => {
-        setNewTitle(event.target.value);
-        // console.log('aaaaaaaaaaaaaaaa', event.target.value);
+    // const titleChangeHandler = (event) => {
+    //     setNewTitle(event.target.value);
+    //     // console.log('aaaaaaaaaaaaaaaa', event.target.value);
 
-        // setUserInput((prevState)=> {
-        //     return {...prevState, newTitle: event.target.value}
-        // })
-        // console.log('aaaaaaaaaaaaaaaa', event.target.value, 'bbbbbbbbbb', userInput);
-    }
+    //     // setUserInput((prevState)=> {
+    //     //     return {...prevState, newTitle: event.target.value}
+    //     // })
+    //     // console.log('aaaaaaaaaaaaaaaa', event.target.value, 'bbbbbbbbbb', userInput);
+    // }
 
     const amountChangeHandler = (event) => {
         setNewAmount(event.target.value);

@@ -20,6 +20,7 @@ const Signup = lazy(() => import('./components/auth/Signup'));
 const LoginForm = lazy(() => import('./components/auth/LoginForm'));
 const AddProduct = lazy(() => import('./components/products/create-product/AddProduct'));
 const ListProduct = lazy(()=> import('./components/products/list-product/ListProduct'));
+const CounterComp = lazy(()=> import('./components/counter/CounterComp'))
 
 const routes = createBrowserRouter([
   {
@@ -82,7 +83,15 @@ const routes = createBrowserRouter([
       {
         path: 'products/:id',
         element: <EditProduct />
-      }
+      },
+      {
+        path: 'counter',
+        element: (
+          <Suspense fallback={<p>Loading...</p>}>
+            <CounterComp />
+          </Suspense>
+        )
+      },
     ]
   }
 ])

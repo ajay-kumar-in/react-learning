@@ -1,7 +1,7 @@
 import styles from './DemoComp.module.css'
-import Card from './Card';
+// import Card from './Card';
 import React, { useState } from 'react';
-import ReactDOM from 'react-dom'
+// import ReactDOM from 'react-dom'
 import FormFun from './FormFun';
 import ListData from './ListData'
 
