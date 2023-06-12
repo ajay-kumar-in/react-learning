@@ -5,8 +5,19 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import 'bootstrap/dist/css/bootstrap.css';
 import { Provider } from 'react-redux';
+import axios from 'axios';
 
 import store from './store/store';
+
+
+const tokenLocal = localStorage.getItem('token');
+let token = tokenLocal.slice(1, tokenLocal.length - 1);
+
+axios.interceptors.request.use(req => {
+  req.headers.Authorization = ('Bearer ' + token);
+  return req;
+}, err => {}, { synchronous: true });
+
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(

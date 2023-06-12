@@ -1,8 +1,11 @@
 // import styles from './ListProduct.module.css';
 
 import { useState, useEffect } from 'react';
+// import axios from 'axios';
+
 import { Link } from 'react-router-dom';
 
+let isInitial = true;
 const ListProduct = () => {
     const [products, setProducts] = useState();
 
@@ -10,6 +13,20 @@ const ListProduct = () => {
         async function getProducts() {
             const tokenLocal = localStorage.getItem('token');
             let token = tokenLocal.slice(1, tokenLocal.length - 1);
+
+            // -----------------http methods using asios-------------
+            // const response = await axios.get('http://localhost:3000/api/product/all?page=1&size=500', {
+            //     method: 'POST',
+            //     headers: {
+            //         'Content-type': 'application/json',
+            //         // 'Authorization': 'Bearer ' + token // -----added in interceptor-------
+            //     },
+            //     body: 'aaaaaaaaaaaa'
+            // })
+            // setProducts(response.data.products);
+            // return
+
+
             const response = await fetch('http://localhost:3000/api/product/all?page=1&size=500', {
                 method: 'GET',
                 headers: {
@@ -19,16 +36,53 @@ const ListProduct = () => {
             });
 
             if (!response.ok) {
-                alert('Please login to load products!')
+                alert('Please login to load products!');
+                return;
             }
 
             const resData = await response.json();
             setProducts(resData.products)
 
         }
-        getProducts();
 
-    }, [])
+        if (isInitial) {
+            isInitial = false;
+            return;
+        }
+
+        getProducts().catch((err) => {
+            console.log('errrrrrrrrrrrrrrr', err.response.data.error);
+        });
+
+    }, []);
+
+    const deleteHandler = (product) => {
+        const tokenLocal = localStorage.getItem('token');
+        let token = tokenLocal.slice(1, tokenLocal.length - 1);
+
+        const deleteProduct = async () => {
+            const response = await fetch(`http://localhost:3000/api/product/${product.id}`, {
+                method: 'Delete',
+                headers: {
+                    'Content-type': 'application/json',
+                    'Authorization': 'Bearer ' + token
+                }
+            });
+
+            if (!response.ok) {
+                alert('Please login to delete products!');
+                return;
+            }
+
+            let index = products.findIndex(prod => prod.id === product.id);
+            products.splice(index, 1);
+            setProducts([...products]);
+        }
+
+        deleteProduct().catch((err) => {
+            console.log('del err', err.response.data);
+        });
+    }
 
     return <div className='card bg-info mt-1'>
         <div className='card-header'>
@@ -60,7 +114,7 @@ const ListProduct = () => {
                             <td>{product && product.status ? 'Available' : 'Not Available'}</td>
                             <td>
                                 <button><Link to={`${product.id}`}>Edit</Link></button>
-                                <button>Delete</button>
+                                <button onClick={() => deleteHandler(product)}>Delete</button>
                             </td>
                         </tr>
                     })}

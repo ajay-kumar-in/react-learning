@@ -1,9 +1,16 @@
 import { Form, useNavigation, redirect } from 'react-router-dom';
+// import { useSelector, useDispatch } from 'react-redux';
+// import { login } from '../../store/auth';
 
 import styles from './LoginForm.module.css'
 
 const LoginForm = () => {
     // form data is submitted using 'Form' tag and 'name' attribute
+    // const auth = useSelector(state=> state.auth.isAuthenticated);
+    // const dispatch = useDispatch();
+    // console.log('authhhhhhhhhhhhhh', auth);
+    // dispatch(login(true));
+    
     const navigation = useNavigation();
     const isSubmitting = navigation.state === 'submitting';
 
