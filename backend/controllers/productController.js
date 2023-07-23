@@ -1,6 +1,7 @@
 "use strict"
 
 const chalk = require('chalk');
+const path = require('path');
 const { request } = require('express');
 const db = require('../config/sequelize');
 const productModel = db.products;
@@ -65,12 +66,19 @@ const getProduct = async (req, res) => {
     } else {
         res.status(404).send({ message: 'Product not found.' });
     }
-
 }
 
 const editProduct = async (req, res) => {
     const pdoductId = req.params.id;
-    const imgFileName = req.file.filename;
+    let imgFileName = req?.file?.filename;
+
+    if(!imgFileName) {
+        imgFileName = path.basename((req.body?.imagePath)[0])
+    } else {
+        return res.status(500).send({
+            message: 'Please upload image.'
+        })
+    }
     const { name, description, originalPrice, discount, category, status } = req.body;
 
     const product = {

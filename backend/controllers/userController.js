@@ -46,7 +46,8 @@ const loginUser = async (req, res, next) => {
         if (!user) {
             return res.status(401).send({ message: 'Please enter coorrect email and password   11111111 !' });
         } else if (passwordMatchFlag) {
-            const jwToken = jwt.sign({ email: user.email, id: user.id }, process.env.JWT_PRIVATE_KEY, { expiresIn: "30m" });
+            // const jwToken = jwt.sign({ email: user.email, id: user.id }, process.env.JWT_PRIVATE_KEY, { expiresIn: "30m" });
+            const jwToken = jwt.sign({ email: user.email, id: user.id }, process.env.JWT_PRIVATE_KEY);
             user.password = undefined;
             return res.status(200).send({ message: 'Loggedin nsuccessfully !', user, token: jwToken, expirationDuration: 1800 })
         } else {

@@ -11,6 +11,7 @@ import ProductHome from './components/products/product-home/ProductHome';
 // import LoginForm from './components/auth/LoginForm';
 import { action as loginFormAction } from './components/auth/LoginForm';
 import EditProduct from './components/products/edit-product/EditProduct';
+import Loader from './components/shared/Loader';
 // import { loader as productsLoader } from './components/products/list-product/ListProduct';
 // import AddProduct from './components/products/create-product/AddProduct';
 
@@ -22,12 +23,13 @@ const AddProduct = lazy(() => import('./components/products/create-product/AddPr
 const ListProduct = lazy(()=> import('./components/products/list-product/ListProduct'));
 const CounterComp = lazy(()=> import('./components/counter/CounterComp'))
 
+
 const routes = createBrowserRouter([
   {
     path: '/',
     element: <ProductLayout />,
     errorElement: (
-      <Suspense fallback={<p>Loading...</p>}>
+      <Suspense fallback={<Loader />}>
         <PageNotFound />
       </Suspense>
     ),
@@ -40,7 +42,7 @@ const routes = createBrowserRouter([
       {
         path: 'signup',
         element: (
-          <Suspense fallback={<p>Loading...</p>}>
+          <Suspense fallback={<Loader />}>
             <Signup />
           </Suspense>
         )
@@ -48,7 +50,7 @@ const routes = createBrowserRouter([
       {
         path: 'login',
         element: (
-          <Suspense fallback={<p>Loading...</p>}>
+          <Suspense fallback={<Loader />}>
             <LoginForm />
           </Suspense>
         ),
@@ -57,7 +59,7 @@ const routes = createBrowserRouter([
       {
         path: 'democomp',
         element: (
-          <Suspense fallback={<p>Loading...</p>}>
+          <Suspense fallback={<Loader />}>
             <DemoComp />
           </Suspense>
         )
@@ -65,7 +67,7 @@ const routes = createBrowserRouter([
       {
         path: 'products/add',
         element: (
-          <Suspense fallback={<p>Loading...</p>}>
+          <Suspense fallback={<Loader />}>
             <AddProduct />
           </Suspense>
         )
@@ -73,7 +75,7 @@ const routes = createBrowserRouter([
       {
         path: 'products',
         element: (
-          <Suspense fallback={<p>Loading...</p>}>
+          <Suspense fallback={<Loader />}>
             <ListProduct />
           </Suspense>
         ),
@@ -87,7 +89,7 @@ const routes = createBrowserRouter([
       {
         path: 'counter',
         element: (
-          <Suspense fallback={<p>Loading...</p>}>
+          <Suspense fallback={<Loader />}>
             <CounterComp />
           </Suspense>
         )

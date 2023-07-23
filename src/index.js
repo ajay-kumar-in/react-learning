@@ -11,7 +11,10 @@ import store from './store/store';
 
 
 const tokenLocal = localStorage.getItem('token');
-let token = tokenLocal.slice(1, tokenLocal.length - 1);
+let token = '';
+if(tokenLocal) {
+  token = tokenLocal.slice(1, tokenLocal.length - 1);
+}
 
 axios.interceptors.request.use(req => {
   req.headers.Authorization = ('Bearer ' + token);
