@@ -3,6 +3,7 @@ import { Form, useNavigation, redirect } from 'react-router-dom';
 // import { login } from '../../store/auth';
 
 import styles from './LoginForm.module.css'
+import baseUrlObj from '../shared/baseUrl';
 
 const LoginForm = () => {
     // form data is submitted using 'Form' tag and 'name' attribute
@@ -46,7 +47,7 @@ export async function action({ request, params }) {
         password: data.get('password')
     }
 
-    const response = await fetch('http://localhost:3000/api/login', {
+    const response = await fetch(`${baseUrlObj.baseUrl}/api/login`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',

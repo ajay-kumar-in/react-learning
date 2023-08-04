@@ -1,7 +1,8 @@
 import { useState, useRef } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 
 import styles from './AddProduct.module.css';
-import { Link, useNavigate } from 'react-router-dom';
+import baseUrlObj from './../../shared/baseUrl';
 
 const AddProduct = () => {
     const navigate = useNavigate();
@@ -47,7 +48,7 @@ const AddProduct = () => {
         }
 
         try {
-            const res = await fetch('http://localhost:3000/api/product/new', {
+            const res = await fetch(`${baseUrlObj.baseUrl}/api/product/new`, {
                 method: 'POST',
                 headers: { },
                 body: formData

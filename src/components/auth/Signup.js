@@ -112,9 +112,11 @@
 
 
 
-import styles from './Signup.module.css';
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+
+import styles from './Signup.module.css';
+import baseUrlObj from '../shared/baseUrl';
 
 const initialState = {
     firstName: '',
@@ -146,7 +148,7 @@ const Signup = () => {
         event.preventDefault();
 
         try {
-            const res = await fetch('http://localhost:3000/api/signup', {
+            const res = await fetch(`${baseUrlObj.baseUrl}/api/signup`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'

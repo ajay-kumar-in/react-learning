@@ -3,6 +3,8 @@ import { useParams,  Link, useNavigate } from "react-router-dom";
 // import { Link, useNavigate } from 'react-router-dom';
 
 import styles from './EditProduct.module.css';
+import baseUrlObj from './../../shared/baseUrl'
+
 const initialState = {
     id: '',
     name: '',
@@ -23,13 +25,13 @@ const EditProduct = () => {
 
     const [editForm, setEditForm] = useState(initialState)
 
-    let firstEffectRun = true;
+    // let firstEffectRun = true;
 
     useEffect(() => {
         async function getProducts() {
             const tokenLocal = localStorage.getItem('token');
             let token = tokenLocal.slice(1, tokenLocal.length - 1);
-            const response = await fetch(`http://localhost:3000/api/product/${params.id}`, {
+            const response = await fetch(`${baseUrlObj.baseUrl}/api/product/${params.id}`, {
                 method: 'GET',
                 headers: {
                     'Content-type': 'application/json',
@@ -48,13 +50,13 @@ const EditProduct = () => {
             console.log('single product', resData);
         }
 
-        if(firstEffectRun) {
-            firstEffectRun = false;
-            return;
-        }
+        // if(firstEffectRun) {
+        //     firstEffectRun = false;
+        //     return;
+        // }
         getProducts();
 
-    }, [])
+    }, [params.id])
 
 
     const onInputChangeHandler = (event)=> {
