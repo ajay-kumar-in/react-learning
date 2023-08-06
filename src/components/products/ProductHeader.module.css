@@ -11,3 +11,7 @@
     transition: all 0.3s;
     color: #111;;
 }
+
+.logoutBtn:active {
+    background-color: rgb(60, 133, 242) !important;
+}

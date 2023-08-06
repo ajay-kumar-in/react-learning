@@ -1,21 +1,21 @@
-// import styles from './ListProduct.module.css';
-
 import { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 // import axios from 'axios';
 
-import { Link } from 'react-router-dom';
+// import styles from './ListProduct.module.css';
 import baseUrlObj from './../../shared/baseUrl'
 
 let isInitial = true;
 const ListProduct = () => {
     const [products, setProducts] = useState();
 
+    let token = useSelector(state=> {
+        return state.auth?.userAuthData?.token;
+    })
+
     useEffect(() => {
         async function getProducts() {
-            const tokenLocal = localStorage.getItem('token');
-            let token = '';
-            if(tokenLocal) token = tokenLocal.slice(1, tokenLocal.length - 1);
-
             // -----------------http methods using asios-------------
             // const response = await axios.get('http://localhost:3000/api/product/all?page=1&size=500', {
             //     method: 'POST',
@@ -61,12 +61,9 @@ const ListProduct = () => {
             console.log('cleanup bode here');
         }
 
-    }, []);
+    }, [token]);
 
     const deleteHandler = (product) => {
-        const tokenLocal = localStorage.getItem('token');
-        let token = tokenLocal.slice(1, tokenLocal.length - 1);
-
         const deleteProduct = async () => {
             const response = await fetch(`${baseUrlObj.baseUrl}/api/product/${product.id}`, {
                 method: 'Delete',
