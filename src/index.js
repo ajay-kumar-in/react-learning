@@ -10,17 +10,14 @@ import axios from 'axios';
 import store from './store/store';
 
 
-const tokenLocal = localStorage.getItem('token');
-let token = '';
-if(tokenLocal) {
-  token = tokenLocal.slice(1, tokenLocal.length - 1);
-}
+const token = JSON.parse(localStorage.getItem('token'));
 
 axios.interceptors.request.use(req => {
   req.headers.Authorization = ('Bearer ' + token);
   return req;
-}, err => {}, { synchronous: true });
-
+}, err => {
+  console.log('err in interceptor, index.js');
+}, { synchronous: true });
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(

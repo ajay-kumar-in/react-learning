@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-// import axios from 'axios';
+import axios from 'axios';
 
 // import styles from './ListProduct.module.css';
 import baseUrlObj from './../../shared/baseUrl'
@@ -17,24 +17,26 @@ const ListProduct = () => {
     useEffect(() => {
         async function getProducts() {
             // -----------------http methods using asios-------------
-            // const response = await axios.get('http://localhost:3000/api/product/all?page=1&size=500', {
-            //     method: 'POST',
-            //     headers: {
-            //         'Content-type': 'application/json',
-            //         // 'Authorization': 'Bearer ' + token // -----added in interceptor-------
-            //     },
-            //     body: 'aaaaaaaaaaaa'
-            // })
-            // setProducts(response.data.products);
-            // return
-
-            const response = await fetch(`${baseUrlObj.baseUrl}/api/product/all?page=1&size=500`, {
-                method: 'GET',
+            const response = await axios.get('http://localhost:3000/api/product/all', {
+                method: 'POST',
                 headers: {
                     'Content-type': 'application/json',
-                    'Authorization': 'Bearer ' + token
+                },
+                body: 'aaaaaaaaaaaa',
+                params: {
+                    page:1,
+                    size:500,
                 }
-            });
+            })
+            setProducts(response.data.products);
+
+            // const response = await fetch(`${baseUrlObj.baseUrl}/api/product/all?page=1&size=500`, {
+            //     method: 'GET',
+            //     headers: {
+            //         'Content-type': 'application/json',
+            //         'Authorization': 'Bearer ' + token
+            //     }
+            // });
 
             if (!response.ok) {
                 console.log('Please login to load products!');
