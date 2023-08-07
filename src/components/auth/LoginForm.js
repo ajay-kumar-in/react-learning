@@ -65,6 +65,6 @@ export async function action({ request, params }) {
         localStorage.setItem('user', JSON.stringify(loginData.user));
         localStorage.setItem('token', JSON.stringify(loginData.token));
         localStorage.setItem('expirationDuration', JSON.stringify(loginData.expirationDuration))
-        return redirect('/products/add');
+        return redirect('/products');
     }
 }

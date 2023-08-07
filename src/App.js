@@ -12,6 +12,7 @@ import ProductHome from './components/products/product-home/ProductHome';
 import { action as loginFormAction } from './components/auth/LoginForm';
 import EditProduct from './components/products/edit-product/EditProduct';
 import Loader from './components/shared/Loader';
+import Protected from './components/auth/auth-util/protected';
 // import { loader as productsLoader } from './components/products/list-product/ListProduct';
 // import AddProduct from './components/products/create-product/AddProduct';
 
@@ -20,8 +21,8 @@ const DemoComp = lazy(() => import('./components/DemoComp'));
 const Signup = lazy(() => import('./components/auth/Signup'));
 const LoginForm = lazy(() => import('./components/auth/LoginForm'));
 const AddProduct = lazy(() => import('./components/products/create-product/AddProduct'));
-const ListProduct = lazy(()=> import('./components/products/list-product/ListProduct'));
-const CounterComp = lazy(()=> import('./components/counter/CounterComp'))
+const ListProduct = lazy(() => import('./components/products/list-product/ListProduct'));
+const CounterComp = lazy(() => import('./components/counter/CounterComp'))
 
 
 const routes = createBrowserRouter([
@@ -68,7 +69,7 @@ const routes = createBrowserRouter([
         path: 'products/add',
         element: (
           <Suspense fallback={<Loader />}>
-            <AddProduct />
+            <Protected CustomComponent={AddProduct} />
           </Suspense>
         )
       },
@@ -77,6 +78,7 @@ const routes = createBrowserRouter([
         element: (
           <Suspense fallback={<Loader />}>
             <ListProduct />
+            {/* <Protected CustomComponent={ListProduct} /> */}
           </Suspense>
         ),
         // loader: productsLoader
@@ -84,7 +86,11 @@ const routes = createBrowserRouter([
       },
       {
         path: 'products/:id',
-        element: <EditProduct />
+        element: (
+          <Suspense fallback={<Loader />}>
+            <Protected CustomComponent={EditProduct} />
+          </Suspense>
+        )
       },
       {
         path: 'counter',

@@ -10,7 +10,7 @@ let isInitial = true;
 const ListProduct = () => {
     const [products, setProducts] = useState();
 
-    let token = useSelector(state=> {
+    let token = useSelector(state => {
         return state.auth?.userAuthData?.token;
     })
 
@@ -28,7 +28,6 @@ const ListProduct = () => {
             // setProducts(response.data.products);
             // return
 
-
             const response = await fetch(`${baseUrlObj.baseUrl}/api/product/all?page=1&size=500`, {
                 method: 'GET',
                 headers: {
@@ -38,13 +37,12 @@ const ListProduct = () => {
             });
 
             if (!response.ok) {
-                alert('Please login to load products!');
+                console.log('Please login to load products!');
                 return;
             }
 
             const resData = await response.json();
             setProducts(resData.products)
-
         }
 
         if (isInitial) {
@@ -53,14 +51,12 @@ const ListProduct = () => {
         }
 
         getProducts().catch((err) => {
-            console.log('errrrrrrrrrrrrrrr',err, err.response?.data.error);
+            console.log('errrrrrrrrrrrrrrr', err, err.response?.data.error);
         });
 
-
-        return ()=> {
+        return () => {
             console.log('cleanup bode here');
         }
-
     }, [token]);
 
     const deleteHandler = (product) => {
@@ -74,7 +70,7 @@ const ListProduct = () => {
             });
 
             if (!response.ok) {
-                alert('Please login to delete products!');
+                console.log('Please login to delete products!');
                 return;
             }
 
@@ -118,12 +114,11 @@ const ListProduct = () => {
                             <td>{product && product.status ? 'Available' : 'Not Available'}</td>
                             <td>
                                 <button><Link to={`${product.id}`}>Edit</Link></button>
-                                <button onClick={() => deleteHandler(product)}>Delete</button>
+                                <button onClick={() => deleteHandler(product)} disabled={!token}>Delete</button>
                             </td>
                         </tr>
                     })}
                 </tbody>
-
             </table>
         </div>
     </div>
@@ -143,7 +138,7 @@ export default ListProduct;
 //     });
 
 //     if (!response.ok) {
-//         alert('Failed to load products!')
+//         console.log('Failed to load products!')
 //         throw json(
 //             { message: 'Could not fetch products.' },
 //             {
