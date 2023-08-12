@@ -6,7 +6,6 @@ import axios from 'axios';
 // import styles from './ListProduct.module.css';
 import baseUrlObj from './../../shared/baseUrl'
 
-let isInitial = true;
 const ListProduct = () => {
     const [products, setProducts] = useState();
 
@@ -14,52 +13,47 @@ const ListProduct = () => {
         return state.auth?.userAuthData?.token;
     })
 
-    useEffect(() => {
-        async function getProducts() {
-            // -----------------http methods using asios-------------
-            const response = await axios.get('http://localhost:3000/api/product/all', {
-                method: 'POST',
-                headers: {
-                    'Content-type': 'application/json',
-                },
-                body: 'aaaaaaaaaaaa',
-                params: {
-                    page:1,
-                    size:500,
-                }
-            })
-            setProducts(response.data.products);
-
-            // const response = await fetch(`${baseUrlObj.baseUrl}/api/product/all?page=1&size=500`, {
-            //     method: 'GET',
-            //     headers: {
-            //         'Content-type': 'application/json',
-            //         'Authorization': 'Bearer ' + token
-            //     }
-            // });
-
-            if (!response.ok) {
-                console.log('Please login to load products!');
-                return;
+    async function getProducts() {
+        // -----------------http methods using asios-------------
+        const response = await axios.get('http://localhost:3000/api/product/all', {
+            method: 'POST',
+            headers: {
+                'Content-type': 'application/json',
+            },
+            params: {
+                page:1,
+                size:500,
             }
+        })
+        setProducts(response.data.products);
 
-            const resData = await response.json();
-            setProducts(resData.products)
-        }
+        //--------------http methods using fetch-------------
+        // const response = await fetch(`${baseUrlObj.baseUrl}/api/product/all?page=1&size=500`, {
+        //     method: 'GET',
+        //     headers: {
+        //         'Content-type': 'application/json',
+        //         'Authorization': 'Bearer ' + token
+        //     }
+        // });
 
-        if (isInitial) {
-            isInitial = false;
-            return;
-        }
+        // if (!response.ok) {
+        //     console.log('Please login to load products!');
+        //     return;
+        // }
 
+        // const resData = await response.json();
+        // setProducts(resData.data.products)
+    }
+
+    useEffect(() => {
         getProducts().catch((err) => {
-            console.log('errrrrrrrrrrrrrrr', err, err.response?.data.error);
-        });
+            console.log('get err', err.response?.data);
+        });  // need to handle gracefull api call err
 
         return () => {
             console.log('cleanup bode here');
         }
-    }, [token]);
+    }, []);
 
     const deleteHandler = (product) => {
         const deleteProduct = async () => {
